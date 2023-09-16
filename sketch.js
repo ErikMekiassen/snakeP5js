@@ -1,27 +1,30 @@
-const canvasXLength = 400;
-const canvasYLength = 400;
+const canvasXLength = 750;
+const canvasYLength = 750;
+let mySnake; // Declare a variable to hold the Snake instance
 
 function setup() {
   createCanvas(canvasXLength, canvasYLength);
   background(50, 190, 50);
-  row(canvasXLength, canvasYLength)
+  grass(canvasXLength, canvasYLength);
 
+  // Initialize the Snake instance
+  mySnake = new Snake(canvasXLength, canvasYLength, 25);
 }
 
 function draw() {
-
+  // Call the Snake's draw method
+  mySnake.update();
 }
 
-function row(XLength, YLength) {
-  var gridLength = XLength / 10
-  fill(50, 180, 50)
-  for (var i = 0; i < XLength + 25; i+=25) {
-    console.log("X loop: ", i)
-    strokeWeight(2)
-    rect(i - 25, 0, 25, 25)
-    for (var j = 0; j < YLength + 25; j+=25) {
-      rect(i - 25, j - 25, 25, 25)
-      console.log("y loop: ", j)  
-    }
+function keyPressed() {
+  console.log("pressed!");
+  if (keyCode === LEFT_ARROW) {
+    mySnake.left();
+  } else if (keyCode === RIGHT_ARROW) {
+    mySnake.right();
+  } else if (keyCode === UP_ARROW) {
+    mySnake.up();
+  } else if (keyCode === DOWN_ARROW) {
+    mySnake.down();
   }
 }
