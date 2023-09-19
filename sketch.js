@@ -1,30 +1,35 @@
 const canvasXLength = 750;
 const canvasYLength = 750;
 let mySnake; // Declare a variable to hold the Snake instance
-
+let pressedKeys = {};
+const fr = 10
+let gameStarted = false
 function setup() {
   createCanvas(canvasXLength, canvasYLength);
   background(50, 190, 50);
-  grass(canvasXLength, canvasYLength);
-
-  // Initialize the Snake instance
+  frameRate(fr);
   mySnake = new Snake(canvasXLength, canvasYLength, 25);
 }
 
 function draw() {
   // Call the Snake's draw method
-  mySnake.update();
+  grass(canvasXLength, canvasYLength);
+  mySnake.draw();
+  wait(300)
 }
 
 function keyPressed() {
-  console.log("pressed!");
-  if (keyCode === LEFT_ARROW) {
-    mySnake.left();
-  } else if (keyCode === RIGHT_ARROW) {
-    mySnake.right();
-  } else if (keyCode === UP_ARROW) {
-    mySnake.up();
-  } else if (keyCode === DOWN_ARROW) {
-    mySnake.down();
+  pressedKeys[key] = true;
+}
+function keyReleased() {
+  delete pressedKeys[key];
+}
+function wait(time)
+{
+  start = millis()
+  do
+  {
+    current = millis();
   }
+  while(current < start + time)
 }

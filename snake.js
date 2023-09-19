@@ -14,49 +14,53 @@ class Snake {
         this.moveYPvalue = 0;
         this.snakeX = 75;
         this.snakeY = 75;
+        this.lastMovement = null;
     }
-
+    /*
     snakePart() {
         fill(200, 0, 0);
-        rect(this.snakeX, this.snakeY, this.XLength, this.YLength);
+        rect(this.snakeX, this.snakeY, this.gridXLength, this.gridYLength);
+        console.log("snake properties:", this.snakeX, this.snakeY, this.gridXLength, this.gridYLength);
+        rect(50, 50, 50, 75)
         console.log("snakepart")
     }
+    */
 
-    update() {
-        // Check movement flags and update snake's position here
-        if (this.moveXP) {
-            this.snakeX += this.gridXLength;
+    update1() {
+
+    }
+    draw() {
+        
+        if (pressedKeys.a) {
+            this.snakeX -= this.gridXLength;
+            this.lastMovement = "a"
             console.log("pressed right");
-        } else if (this.moveX) {
-            this.snakeX -= this.gridXLength
-        } else if (this.moveY) {
-            this.snakeY += this.gridYLength
-        } else if (this.moveY) {
+        } else if (pressedKeys.d) {
+            this.snakeX += this.gridXLength
+            this.lastMovement = "d"
+        } else if (pressedKeys.w) {
             this.snakeY -= this.gridYLength
+            this.lastMovement = "w"
+        } else if (pressedKeys.s) {
+            this.snakeY += this.gridYLength
+            this.lastMovement = "s"
         }
-        // Add similar checks for other directions (left, up, down)
-    }
+        if (this.lastMovement) {
+            console.log("lastMovement")
+            if (this.lastMovement === "a") {
+                this.snakeX -= this.gridXLength;
+            } else if (this.lastMovement === "d") {
+                this.snakeX += this.gridXLength;
+            } else if (this.lastMovement === "d") {
+                this.snakeY -= this.gridYLength;
+            } else if (this.lastMovement === "d") {
+                this.snakeY += this.gridYLength;
+            }
+        }
 
-    left() {
-        this.moveXN = true;
-        console.log("pressed left");
-    }
-
-    right() {
-        this.moveXP = true;
-        console.log("pressed right");
-    }
-
-    up() {
-        this.moveYN = true;
-        console.log("pressed up");
-    }
-
-    down() {
-        this.moveYP = true;
-        console.log("pressed down");
+        fill(200, 0, 0);
+        rect(this.snakeX + 5, this.snakeY + 5, this.gridXLength - 10, this.gridYLength - 10);
+        console.log("snake properties:", this.snakeX, this.snakeY);
+        
     }
 }
-
-// Usage:
-// const snake = new Snake(100, 100); // Replace with your desired XLength and YLength
